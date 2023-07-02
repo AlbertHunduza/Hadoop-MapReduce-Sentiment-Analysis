@@ -88,6 +88,8 @@ OpenSSL version: OpenSSL 3.0.2 15 Mar 2022
 - Without modifications the docker container can only host one docker program at a time.
 So you are required to copy & paste this folder for each MapReduce job and repeat the previous steps for each folder
 - You are required to use the provided `mapper.py` and `reducer.py` to write your program
+- You can use the provided twitter.txt file as the input file, or you can paste your own input text file in the hadoop_code folder
+   - if you use your own input file modify the code in the run.sh file to use that file as the input instead of the twitter.txt file
 - Execute your program in the **second** terminal that you prepared in the previous section
   - From the `code` directory execute `sh run.sh`
   - You will see lots of output
@@ -96,11 +98,20 @@ So you are required to copy & paste this folder for each MapReduce job and repea
   [root@8383cb765f57 code]# sh run.sh 
   [...]
   2023-04-28 13:17:06 INFO  StreamJob:1029 - Output directory: out
-  20      1
-  house   2
-  is      1
-  no      1
-  number  1
+Word/Token     Average Sentiment Score
+--------------------------------------
+feature        1.00
+nvda           1.00
+ok             1.00
+popularity     1.00
+awesome        0.95
+finally        0.93
+exciting       0.84
+broadcast      0.81
+love           0.79
+well           0.77
+3d             0.73
+beautiful      0.71
   [root@8383cb765f57 code]# 
   ```
   - You can always re-visit the log of your last run locally on your laptop
