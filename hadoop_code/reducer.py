@@ -1,35 +1,23 @@
 import sys
+import logging
 
-current_word = None
-current_count = 0
-word = None
+logger = logging.getLogger()
+word_count = {}
+word_sentiment = {}
 
 # input comes from STDIN
 for line in sys.stdin:
-    # remove leading and trailing whitespace
-    line = line.strip()
 
-    # parse the input we got from mapper.py
-    word, count = line.split()
+    word, sentiment_score = line.strip().split()
 
-    # convert count (currently a string) to int
     try:
-        count = int(count)
-    except ValueError:
-        # count was not a number, so silently
-        # ignore/discard this line
-        continue
+        word_count[word] += 1
+        word_sentiment[word] += int(sentiment_score)
+    except KeyError:
+        word_count[word] = 0
+        word_sentiment[word] = int(sentiment_score)
 
-    # this IF-switch only works because Hadoop sorts map output
-    # by key (here: word) before it is passed to the reducer
-    if current_word == word:
-        current_count += count
-    else:
-        if current_word:
-            # write result to STDOUT
-            print(f'{current_word} {current_count}')
-        current_count = count
-        current_word = word
-
-print(f'{current_word} {current_count}')
-
+for word, sentiment_score in word_sentiment.items():
+    if word_count[word] > 15:
+        if sentiment_score/word_count[word] != 1 and sentiment_score/word_count[word] != 0:
+            print(f'{word}: {sentiment_score/word_count[word]}')

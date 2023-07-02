@@ -1,16 +1,24 @@
 import sys
+import string
+import logging
+
+logger = logging.getLogger()
 
 # input comes from STDIN (standard input)
 for line in sys.stdin:
-    # remove leading and trailing whitespace
-    line = line.strip()
-    # split the line into words
-    words = line.split()
-    # increase counters
-    for word in words:
-        # write the results to STDOUT (standard output);
-        # what we output here will be the input for the
-        # Reduce step, i.e. the input for reducer.py
-        #
-        # tab-delimited; the trivial word count is 1
-        print(f'{word} {1}')
+
+    sentiment_score, sentence = line.strip().lower().split(':', 1)
+
+    word_array = sentence.split()
+
+    for idx, token in enumerate(word_array):
+        new_token = token
+        for symbol in token:
+            if symbol in string.punctuation:
+                new_token = new_token.replace(symbol, '')
+        word_array[idx] = new_token
+
+    for word in word_array:
+        if len(word) > 0:
+            print(f'{word} {sentiment_score}')
+
