@@ -1,0 +1,6 @@
+version: "3.9"
+services:
+  hadoop:
+    build: .
+    volumes:
+      - ./hadoop_code:/opt/hadoop/code
