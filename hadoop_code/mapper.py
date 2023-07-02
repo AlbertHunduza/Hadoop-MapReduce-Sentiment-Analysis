@@ -4,6 +4,12 @@ import logging
 
 logger = logging.getLogger()
 
+# Read stop words from stopwords.txt file
+stop_words = set()
+with open('stopwords.txt', 'r') as f:
+    for word in f:
+        stop_words.add(word.strip())
+
 # input comes from STDIN (standard input)
 for line in sys.stdin:
 
@@ -19,6 +25,7 @@ for line in sys.stdin:
         word_array[idx] = new_token
 
     for word in word_array:
-        if len(word) > 0:
+        if len(word) > 0 and word not in stop_words:
             print(f'{word} {sentiment_score}')
+
 
