@@ -48,7 +48,7 @@ OpenSSL version: OpenSSL 3.0.2 15 Mar 2022
 ## Starting the Docker Image
 1. Download all the project files or simply clone it to a folder on your system. 
 2. Open a terminal on your laptop (You can use the terminal inside PyCharm or VSCode)
-3. Navigate to the `hadoop_docker_nlp` folder
+3. Navigate to the folder where you saved the files
 4. Execute `docker-compose up --build`
    - The first time you do this will probably take a few minutes
    - If successful, the terminal will display 
